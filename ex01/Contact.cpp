@@ -24,3 +24,23 @@ const std::string &Contact::get_secret(void) const
 {
     return (this->secret);
 }
+
+void Contact::set_name(const std::string name) {
+    this->name = name;
+}
+
+void Contact::set_lastname(const std::string lastname) {
+    this->lastname = lastname; 
+}
+
+void Contact::set_nickname(const std::string nickname) {
+    this->nickname = nickname; 
+}
+
+void Contact::set_number(const std::string number) {
+    this->number = number; 
+}
+
+void Contact::set_secret(const std::string secret) {
+    this->secret = secret; 
+}
