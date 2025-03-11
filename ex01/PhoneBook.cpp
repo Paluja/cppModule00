@@ -1,80 +1,110 @@
-#include "PhoneBook.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/31 14:25:17 by pjimenez          #+#    #+#             */
+/*   Updated: 2025/01/31 14:33:01 by pjimenez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "includes.hpp"
 
-void print_name(std::string str)
-{
-    int i = 0;
-
-    if(str.length() > 10)
-    {
-        std::cout << str.substr(0, 9);
-        std::cout << ".";
-    }
-    else 
-    {
-        while ( i < (10 - str.length()) )
-            std::cout << " ";
-        std::cout << str;
-    }
+PhoneBook::PhoneBook() : max_contacts(8), current_nb(0), nb_contacts(0) {
 }
 
-int PhoneBook::get_size(void) const
-{
-    return (this->size);
+PhoneBook::~PhoneBook() {
 }
 
-void PhoneBook::add_contact(std::string data[5])
-{
-    int index = this->index;
-    
-    this->contacts[index].set_name(data[0]);
-    this->contacts[index].set_lastname(data[1]);
-    this->contacts[index].set_nickname(data[2]);
-    this->contacts[index].set_number(data[3]);
-    this->contacts[index].set_secret(data[4]);
-    
-    this->index = (index + 1) % 8;
-    
-    if (this->size < 8)
-    {
-        this->size++;
-    }
+void	PhoneBook::add_contact() {
+	str	name;
+	str	last;
+	str	nick;
+	str	phone;
+	str	secret;
+
+	system("clear");
+	if (this->current_nb == 8)
+		this->current_nb = 0;
+	system("clear");
+	std::cout << "Type a name : ";
+	std::getline(std::cin, name);
+	system("clear");
+	std::cout << "Type a surname : ";
+	std::getline(std::cin, last);
+	system("clear");
+	std::cout << "Type a nickname : ";
+	std::getline(std::cin, nick);
+	system("clear");
+	std::cout << "Type a phone-number : ";
+	std::getline(std::cin, phone);
+	system("clear");
+	std::cout << "Type a dark secret : ";
+	std::getline(std::cin, secret);
+	system("clear");
+	this->array[this->current_nb].setLast(last);
+	this->array[this->current_nb].setNick(nick);
+	this->array[this->current_nb].setPhone(phone);
+	this->array[this->current_nb].setName(name);
+	this->array[this->current_nb].setSecret(secret);
+	this->current_nb++;
+	if (nb_contacts < 8)
+		nb_contacts++;
 }
 
-void PhoneBook::display_contact(int i) const
-{
-    std::cout << "-----------------------------------------------------------"<< std::endl;
-    std::cout << "                  Contact Information                     "<< std::endl;
-    std::cout << "-----------------------------------------------------------"<< std::endl;
-    
-    std::cout << "First name" << this->contacts[i].get_name() << std::endl;
-    std::cout << "Last name"<< this->contacts[i].get_lastname() << std::endl;
-    std::cout << "Nickname"<< this->contacts[i].get_nickname() << std::endl;
-    std::cout << "Secret"<< this->contacts[i].get_secret() << std::endl;
-    std::cout << "Number"<< this->contacts[i].get_number() << std::endl;
-
-}
-
-void PhoneBook::display_book() const
-{
-    int i = 0;
-
-    std::cout << "" << std::endl;
-    std::cout << "--------------------------------------------" << std::endl;
-    std::cout << "|     Index|First name| Last name| Nickname|" << std::endl;
-    std::cout << "--------------------------------------------" << std::endl;
-
-    while(i < size )
-    {
-        std::cout  << "|         ";
-		std::cout << i;
-		std::cout << "|";
-		print_name(this->contacts[i].get_name());
-		std::cout << "|";
-		print_name(this->contacts[i].get_lastname());
-		std::cout << "|";
-		print_name(this->contacts[i].get_nickname());
-		std::cout << "|"<< std::endl;
-        i++;
-    }
+void	PhoneBook::search_contact() {
+	int	i = 0;
+	str	name;
+	str	last;
+	str	nick;
+	str	phone;
+	str	secret;
+	str	ret;
+	int	index;
+	
+	system("clear");
+	if (this->current_nb == 0) {
+		std::cout << "No contact avalaible ! Abort..." << std::endl; sleep(1); return;
+	}
+	std::cout << std::setw(5) << "Index" << "|";
+	std::cout << std::setw(10) << "Firstname" << "|";
+	std::cout << std::setw(10) << "Lastname" << "|";
+	std::cout << std::setw(10) << "Nickname" << std::endl;
+	while (i < nb_contacts) {
+		std::cout << std::setw(5) << i << "|";
+		name = this->array[i].getName();
+		last = this->array[i].getLast();
+		nick = this->array[i].getNick();
+		phone = this->array[i].getPhone();
+		secret = this->array[i].getSecret();
+		if (name.length() > 9)
+			name = name.substr(0, 9) + ".";
+		if (last.length() > 9)
+			last = last.substr(0, 9) + ".";
+		if (nick.length() > 9)
+			nick = nick.substr(0, 9) + ".";
+		std::cout << std::setw(10) << name << "|";
+		std::cout << std::setw(10) << last << "|";
+		std::cout << std::setw(10) << nick << std::endl;
+		i++;
+	}
+	std::cout << std::endl << "Type a contact's index to obtain personal informations : ";
+	std::getline(std::cin, ret);
+	index = atoi(ret.c_str());
+	if ((index == 0 && ret[0] != '0') || (index > 7 || index < 0)) {
+		std::cout << "Please enter a valid digit ! Abort..." << std::endl; sleep(1); return;
+	}
+	if (index >= this->nb_contacts) {
+		std::cout << "No contact found ! Abort..." << std::endl; sleep(1); return;
+	}
+	std::cout << "Name : " << this->array[index].getName() << std::endl;
+	std::cout << "Lastname : " << this->array[index].getLast() << std::endl;
+	std::cout << "Nickname : " << this->array[index].getNick() << std::endl;
+	std::cout << "Phone number : " << this->array[index].getPhone() << std::endl;
+	std::cout << "Darkest secret : " << this->array[index].getSecret() << std::endl;
+	std::cout << std::endl << "Press a key to continue..." << std::endl;
+	getchar();
+	getchar();
 }

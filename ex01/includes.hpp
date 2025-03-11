@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   includes.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 14:31:45 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/31 14:33:04 by pjimenez         ###   ########.fr       */
+/*   Created: 2025/01/31 14:32:27 by pjimenez          #+#    #+#             */
+/*   Updated: 2025/01/31 14:32:28 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_H
-#define PHONEBOOK_H
+#ifndef INCLUDES_H
+#define INCLUDES_H
 
-#include "includes.hpp"
+#include <iostream>
+#include <cctype>
+#include <string>
+#include <unistd.h>
+#include <cstdlib>
+#include <iomanip>
+#include <cstdio>
 
-class	PhoneBook {
-	private:
-		const	int	max_contacts;
-		int			current_nb;
-		int			nb_contacts;
-		Contact		array[8];
-	public:
-		PhoneBook();
-		~PhoneBook();
+typedef std::string str;
 
-		void	add_contact();
-		void	search_contact();
-		
-
-};
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 
 #endif

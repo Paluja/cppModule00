@@ -1,46 +1,47 @@
-#include "Contact.hpp"
+#include "includes.hpp"
 
-const std::string &Contact::get_name(void) const
-{
-    return (this->name);
+Contact::Contact() {
 }
 
-const std::string &Contact::get_lastname(void) const
-{
-    return (this->lastname);
+Contact::~Contact() {
 }
 
-const std::string &Contact::get_nickname(void) const
-{
-    return (this->nickname);
+void	Contact::setName(str name) {
+	this->name = name;
 }
 
-const std::string &Contact::get_number(void) const
-{
-    return (this->number);
+void	Contact::setLast(str last) {
+	this->last = last;
 }
 
-const std::string &Contact::get_secret(void) const
-{
-    return (this->secret);
+void	Contact::setNick(str nick) {
+	this->nick = nick;
 }
 
-void Contact::set_name(const std::string name) {
-    this->name = name;
+void	Contact::setPhone(str phone) {
+	this->phone = phone;
 }
 
-void Contact::set_lastname(const std::string lastname) {
-    this->lastname = lastname; 
+void	Contact::setSecret(str secret) {
+	this->secret = secret;
 }
 
-void Contact::set_nickname(const std::string nickname) {
-    this->nickname = nickname; 
+str	Contact::getName() const {
+	return this->name;
 }
 
-void Contact::set_number(const std::string number) {
-    this->number = number; 
+str Contact::getLast() const {
+	return this->last;
 }
 
-void Contact::set_secret(const std::string secret) {
-    this->secret = secret; 
+str Contact::getNick() const {
+	return this->nick;
+}
+
+str Contact::getPhone() const {
+	return this->phone;
+}
+
+str	Contact::getSecret() const {
+	return this->secret;
 }
