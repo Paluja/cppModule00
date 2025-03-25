@@ -6,7 +6,7 @@
 /*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:25:17 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/03/12 01:06:55 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/03/25 13:11:55 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ void	PhoneBook::search_contact() {
 	std::cout << "Phone number : " << this->array[index].getPhone() << std::endl;
 	std::cout << "Darkest secret : " << this->array[index].getSecret() << std::endl;
 	std::cout << std::endl << "Press a key to continue..." << std::endl;
-	// getchar();
-	// getchar();
+	getchar();
+	
 }
